@@ -1,0 +1,244 @@
+from bs4 import BeautifulSoup as soup
+from urllib.request import urlopen
+import requests,urllib,urllib3
+from urllib.request import Request
+#copy the link here
+link = ''
+obj0 = {}
+obj1 = {}
+obj2 = {}
+obj3 = {}
+obj4 = {}
+obj5 = {}
+obj6 = {}
+#functions
+def length(url):
+    resp = Request(url,headers={'User-Agent': 'Mozilla/5.0'})
+    resp = urlopen(url).read()
+    #resp = urlopen(str(url))
+    len = int(resp.headers['Content-Length']) /1024
+    return int(len/1024)
+def find_title(data):    
+    index = data.find('|')
+    u = data[:index]
+    nindex = u.find("'")+1
+    print( nindex)
+    if (nindex == -1):
+        return u
+    else:
+        nu = u[nindex:]
+        indexed = nu.find("'")
+        if(indexed != -1):
+            a = nu[:indexed]
+            print(a)
+        return a   
+def download_file(url,title):
+    filename = title+".mp4"
+    resp = urlopen(url)
+    length = int(resp.headers['Content-Length'])
+    myfile = open("C:/Users/Pragath/source/repos/PythonApplication8/PythonApplication8/download/videos/"+filename,'wb+')
+    done = 0
+    buff = resp.read(1024)
+    print('Downloading Started...')
+    while buff:
+        myfile.write(buff)
+        done +=1024
+        percent = done * 100/length
+        print ("\r"+str(int(percent))+"%",end='')
+        buff = resp.read(1024)
+def urlmaker(link):
+    que = link.find('?')
+    video_id = link[que+3:]
+    watch = link.find('watch')
+    url = link[:watch]+'get_video_info?video_id='+video_id
+    return url
+
+
+    for i in obj0:
+        if 'quality' in i:
+            oquality = str(obj0[i])
+            quality = oquality[2:len(oquality)-2]
+            print ('Quality - ',quality,"\t")
+            
+        elif 'type' in i:
+            otype = str(obj0[i])
+            index = otype.rfind(';')
+            type = otype[2:index]
+            print ('Typeofile/Format -', type,"\t")
+def print_choices(listcount):
+   
+    for count in range(0,listcount):
+        if (count == listcount):
+            break
+        if(count == 0):
+            print (count)
+            for i in obj0:
+                if 'quality' in i:
+                    oquality = str(obj0[i])
+                    quality = oquality[2:len(oquality)-2]
+                    print ('Quality - ',quality,"\t")
+                elif 'type' in i:
+                    otype = str(obj0[i])
+                    index = otype.rfind(';')
+                    type = otype[2:index]
+                    print ('Typeofile/Format -', type,"\t")
+                elif 'url' in i:
+                    l = length(obj0[i][0])
+                    print ('size : ',l,"MB" )
+            print( '-'*120)
+        elif(count == 1):
+            print (count)
+            for i in obj1:
+                if 'quality' in i:
+                    oquality = str(obj1[i])
+                    quality = oquality[2:len(oquality)-2]
+                    print ('Quality - ',quality,"\t")                    
+                elif 'type' in i:
+                    otype = str(obj1[i])
+                    index = otype.rfind(';')
+                    type = otype[2:index]
+                    print('Typeofile/Format -', type,"\t")
+                elif 'url' in i:
+                    l = length(obj1[i][0])
+                    print( 'size : ',l ,"MB")
+            print ('-'*120)
+        elif(count == 2):
+            print (count)
+            for i in obj2:
+                if 'quality' in i:
+                    oquality = str(obj2[i])
+                    quality = oquality[2:len(oquality)-2]
+                    print ('Quality - ',quality,"\t")
+                elif 'type' in i:
+                    otype = str(obj2[i])
+                    index = otype.rfind(';')
+                    type = otype[2:index]
+                    print ('Typeofile/Format -', type,"\t")
+                elif 'url' in i:
+                    l = length(obj2[i][0])
+                    print ('size : ',l ,"MB")
+            print('-'*120)
+        elif(count == 3):
+            print (count)
+            for i in obj3:
+                if 'quality' in i:
+                    oquality = str(obj3[i])
+                    quality = oquality[2:len(oquality)-2]
+                    print( 'Quality - ',quality,"\t")
+                elif 'type' in i:
+                    otype = str(obj3[i])
+                    index = otype.rfind(';')
+                    type = otype[2:index]
+                    print ('Typeofile/Format -', type,"\t")
+                elif 'url' in i:
+                    l = length(obj3[i][0])
+                    print ('size : ',l ,"MB")
+            print ('-'*120)
+        elif(count == 4):
+            print (count)
+            for i in obj4:
+                if 'quality' in i:
+                    oquality = str(obj4[i])
+                    quality = oquality[2:len(oquality)-2]
+                    print ('Quality - ',quality,"\t")
+                elif 'type' in i:
+                    otype = str(obj4[i])
+                    index = otype.rfind(';')
+                    type = otype[2:index]
+                    print ('Typeofile/Format -', type,"\t")
+                elif 'url' in i:
+                    l = length(obj4[i][0])
+                    print('size : ',l ,"MB")
+            print ('-'*120)
+        elif(count == 5):
+            print (count)
+            for i in obj5:
+                if 'quality' in i:
+                    oquality = str(obj5[i])
+                    quality = oquality[2:len(oquality)-2]
+                    print( 'Quality - ',quality,"\t")
+                    
+                elif 'type' in i:
+                    otype = str(obj5[i])
+                    index = otype.rfind(';')
+                    type = otype[2:index]
+                    print ('Typeofile/Format -', type,"\t")
+                elif 'url' in i:
+                    l = length(obj5[i])
+                    print ('size : ',l ,"MB")
+            print( '-'*120)
+        elif(count == 6):
+            print(count)
+            for i in obj6:
+                if 'quality' in i:
+                    oquality = str(obj6[i])
+                    quality = oquality[2:len(oquality)-2]
+                    print ('Quality - ',quality,"\t")                    
+                elif 'type' in i:
+                    otype = str(obj6[i])
+                    index = otype.rfind(';')
+                    type = otype[2:index]
+                    print ('Typeofile/Format -', type,"\t")
+                elif 'url' in i:
+                    l = length(obj6[i][0])
+                    print ('size : ',l ,"MB")
+            print ('-'*120)
+
+if __name__=='__main__':
+    while True:
+        u = str(input("enter any link : "))
+        if u == 'q':
+            break
+        url = urlmaker(u)
+        a = requests.get(url)
+        #changing web sites data into dictionary
+        parsed = urllib.parse.parse_qs(a.text)
+        #title of video
+        temp = parsed['title']
+        title = find_title(str(temp))
+        #getting url from where video can be downloaded
+        stream_map = parsed['url_encoded_fmt_stream_map']
+        url = str(stream_map).split(',')
+        listcount = 0
+        for x in url:
+            listcount +=1
+        count = 0
+        for i in url:
+            if (count == listcount):
+                break
+            if(count == 0):
+                obj0 = urllib.parse.parse_qs(i)
+                count+=1
+            elif(count == 1):
+                obj1 = urllib.parse.parse_qs(i)
+                count+=1
+            elif(count == 2):
+                obj2 = urllib.parse.parse_qs(i)
+                count+=1
+            elif(count == 3):
+                obj3 = urllib.parse.parse_qs(i)
+                count+=1
+            elif(count == 4):
+                obj4 = urllib.parse.parse_qs(i)
+                count+=1
+            elif(count == 5):
+                obj5 = urllib.parse.parse_qs(i)
+                count+=1
+            elif(count == 6):
+                obj6 = urllib.parse.parse_qs(count)
+                count+=1
+        #prints choices of video qualities
+        print_choices(listcount)
+        print ("You have total " , listcount ,"choices \n")        
+        #let user choose between quality
+        choice = int(input("Enter Your choice : "))
+        #main data :  url,quality,type,itag is stored in a dictionary called data
+        data = urllib.parse.parse_qs(url[choice])
+        #the url from where videos 's data have to be received is assigned  
+        for i in data:          
+            if 'url' in i:
+                download_file(data[i][0],title)       
+        print ("File "+title+" Donwloaded...!!!")
+        
+
+
